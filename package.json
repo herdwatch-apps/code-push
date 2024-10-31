@@ -1,12 +1,12 @@
 {
-  "name": "code-push",
+  "name": "@herdwatch/code-push",
   "version": "4.2.2",
   "description": "Management SDK for the CodePush service",
   "main": "script/index.js",
   "types": "script/index.d.ts",
   "scripts": {
     "clean": "shx rm -rf bin",
-    "setup": "npm install --quiet --no-progress",
+    "setup": "npm i",
     "prebuild": "npm run clean",
     "build": "tsc && npm run content",
     "prebuild:release": "npm run clean",
