@@ -14,7 +14,7 @@
     "check:release" : "npx ts-node .github/scripts/check-for-declaration.ts",
     "test": "npm run build && mocha --recursive bin/test",
     "test:debugger": "mocha --recursive --inspect-brk=0.0.0.0 bin/test",
-    "content": "shx cp {README.md,package.json,.npmignore} bin"
+    "content": "shx cp {plugin.xml,README.md,package.json,.npmignore} bin"
   },
   "repository": {
     "type": "git",
