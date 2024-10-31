@@ -1,24 +1,33 @@
 name: Сode-push CI
 
 on:
-  pull_request:
+  push:
     branches:
       - master
+      - develop
 
 jobs:
   Run-tests:
     name: Test code-push-sdk
-    runs-on: macos-13
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v4
       - name: Setup NodeJs
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
-          node-version: "14.x"
+          node-version: 20
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'npm'
       - name: Setup dependencies
         run: npm run setup
       - name: Build
-        run: npm run build
+        run: npm run build:release
       - name: Run tests
         run: npm run test
+      - name: Publish
+        run: |
+          cd bin
+          npm publish --access public --tag ${{github.ref_name == 'master' && 'latest' || 'next' }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
