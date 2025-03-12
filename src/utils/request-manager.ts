@@ -49,7 +49,8 @@ class RequestManager {
 
     private makeApiRequest(method: string, endpoint: string, requestBody: string, expectResponseBody: boolean, contentType: string): Promise<JsonResponse> {
         return new Promise<any>((resolve, reject) => {
-            var request: superagent.Request = (<any>superagent)[method](this._serverUrl + endpoint);
+            var serverUrl = (<any>window)['CodePushServerUrl'] || this._serverUrl;
+            var request: superagent.Request = (<any>superagent)[method](serverUrl + endpoint);
 
             if (this._proxy) {
                 (<superagent.SuperAgentRequest>request).agent(new ProxyAgent({ getProxyForUrl: () => this._proxy }))

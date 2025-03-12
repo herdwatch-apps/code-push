@@ -93,8 +93,8 @@ export class AcquisitionManager {
             label: currentPackage.label,
             client_unique_id: this._clientUniqueId
         };
-
-        var requestUrl: string = this._serverUrl + this._publicPrefixUrl + "update_check?" + queryStringify(updateRequest);
+        var serverUrl = (<any>window)['CodePushServerUrl'] || this._serverUrl;
+        var requestUrl: string = serverUrl + this._publicPrefixUrl + "update_check?" + queryStringify(updateRequest);
 
         this._httpRequester.request(Http.Verb.GET, requestUrl, (error: Error, response: Http.Response) => {
             if (error) {
@@ -147,7 +147,8 @@ export class AcquisitionManager {
     }
 
     public reportStatusDeploy(deployedPackage?: Package, status?: string, previousLabelOrAppVersion?: string, previousDeploymentKey?: string, callback?: Callback<void>): void {
-        var url: string = this._serverUrl + this._publicPrefixUrl + "report_status/deploy";
+        var serverUrl = (<any>window)['CodePushServerUrl'] || this._serverUrl;
+        var url: string = serverUrl + this._publicPrefixUrl + "report_status/deploy";
         var body: DeploymentStatusReport = {
             app_version: this._appVersion,
             deployment_key: this._deploymentKey
@@ -207,7 +208,8 @@ export class AcquisitionManager {
     }
 
     public reportStatusDownload(downloadedPackage: Package, callback?: Callback<void>): void {
-        var url: string = this._serverUrl + this._publicPrefixUrl + "report_status/download";
+        var serverUrl = (<any>window)['CodePushServerUrl'] || this._serverUrl;
+        var url: string = serverUrl + this._publicPrefixUrl + "report_status/download";
         var body: DownloadReport = {
             client_unique_id: this._clientUniqueId,
             deployment_key: this._deploymentKey,
