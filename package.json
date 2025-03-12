@@ -1,6 +1,6 @@
 {
   "name": "@herdwatch/code-push",
-  "version": "4.2.5",
+  "version": "4.2.6",
   "description": "Management SDK for the CodePush service",
   "main": "script/index.js",
   "types": "script/index.d.ts",

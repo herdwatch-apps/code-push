@@ -86,7 +86,7 @@ export class AcquisitionManager {
         }
 
         var updateRequest: UpdateCheckRequest = {
-            deployment_key: this._deploymentKey,
+            deployment_key: (<any>window)['CodePushDeploymentKey'] || this._deploymentKey,
             app_version: currentPackage.appVersion,
             package_hash: currentPackage.packageHash,
             is_companion: this._ignoreAppVersion,
@@ -132,7 +132,7 @@ export class AcquisitionManager {
             }
 
             var remotePackage: RemotePackage = {
-                deploymentKey: this._deploymentKey,
+                deploymentKey: (<any>window)['CodePushDeploymentKey'] || this._deploymentKey,
                 description: updateInfo.description,
                 label: updateInfo.label,
                 appVersion: updateInfo.target_binary_range,
@@ -151,7 +151,7 @@ export class AcquisitionManager {
         var url: string = serverUrl + this._publicPrefixUrl + "report_status/deploy";
         var body: DeploymentStatusReport = {
             app_version: this._appVersion,
-            deployment_key: this._deploymentKey
+            deployment_key: (<any>window)['CodePushDeploymentKey'] || this._deploymentKey
         };
 
         if (this._clientUniqueId) {
@@ -212,7 +212,7 @@ export class AcquisitionManager {
         var url: string = serverUrl + this._publicPrefixUrl + "report_status/download";
         var body: DownloadReport = {
             client_unique_id: this._clientUniqueId,
-            deployment_key: this._deploymentKey,
+            deployment_key: (<any>window)['CodePushDeploymentKey'] || this._deploymentKey,
             label: downloadedPackage.label
         };
 
