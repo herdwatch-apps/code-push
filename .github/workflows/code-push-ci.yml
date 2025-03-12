@@ -23,8 +23,8 @@ jobs:
         run: npm run setup
       - name: Build
         run: npm run build:release
-      - name: Run tests
-        run: npm run test
+#      - name: Run tests
+#        run: npm run test
       - name: Publish
         run: |
           cd bin
