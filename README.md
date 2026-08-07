@@ -4,6 +4,18 @@
 
 # CodePush SDK
 
+## Why this fork exists
+
+Forked from [upstream](https://github.com/microsoft/code-push) because Herdwatch runs its own self-hosted CodePush server rather than Microsoft's (now-retired) App Center-hosted one, and needed the acquisition/management SDK's server URL and deployment key to be overridable at runtime instead of hard-coded at build time.
+
+Published as [`@herdwatch/code-push`](https://www.npmjs.com/package/@herdwatch/code-push).
+
+Changes from upstream:
+- Removed the App Center-specific circuit breaker that permanently disabled further API calls after certain error responses from `appcenter.ms` — not applicable against a self-hosted server
+- Added runtime overrides for the deployment key and server URL via `window.CodePushDeploymentKey` / `window.CodePushServerUrl`, so the app can point at a different CodePush server without a rebuild
+- Added `plugin.xml` so the SDK can be consumed directly as a Cordova plugin module rather than only as a standalone npm package
+- Republished under the `@herdwatch/code-push` npm scope
+
 [CodePush](https://microsoft.github.io/code-push) is a cloud service that enables Cordova and React Native developers to deploy mobile app updates directly to their users' devices. It works by acting as a central repository that developers can publish updates to (JS, HTML, CSS and images), and that apps can query for updates from (using provided client SDK for [Cordova](https://github.com/herdwatch-apps/cordova-plugin-code-push) and [React Native](https://github.com/Microsoft/react-native-code-push)). This allows you to have a more deterministic and direct engagement model with your userbase, when addressing bugs and/or adding small features that don't require you to re-build a binary and re-distribute it through the respective app stores.
 
 To start integrating CodePush into your project, visit our [documentation](https://docs.microsoft.com/en-us/appcenter/distribution/codepush/). If you're interested in contributing or building the SDK from source, follow the steps below.
